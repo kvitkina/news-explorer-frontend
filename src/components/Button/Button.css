@@ -10,6 +10,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
 }
 
 .button_header-auth {
@@ -33,7 +37,6 @@
   width: 168px;
   text-align: center;
   border: none;
-  z-index: 2;
   position: absolute;
   right: 0;
   top: 0;
@@ -59,6 +62,22 @@
   background-color: rgba(255, 255, 255, .9);
 }
 
+.button_popup {
+  width: 360px;
+  height: 64px;
+  background-color: #2F71E5;
+  border: none;
+  margin-bottom: 16px;
+}
+
+.button_popup:hover {
+  background-color: #347EFF;
+}
+
+.button_popup:active {
+  background-color: #2A65CC;
+}
+
 @media screen and (max-width: 890px) {
   .button {
     height: 56px;
@@ -73,12 +92,13 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 675px) {
   .button {
     width: 288px;
   }
   .button_header-auth {
     height: 56px;
+    align-self: center;
   }
   .button_search {
     position: relative;

@@ -27,3 +27,9 @@
   font-family: 'SourceSansPro';
   font-weight: normal;
 }
+
+@font-face {
+  src: url('./inter-regular.woff') format('woff');
+  font-family: 'Inter';
+  font-weight: normal;
+}

@@ -9,11 +9,15 @@ import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
 
 
-const Main = () => {
+const Main = ({ onLogin, onMenuClick, isMenuOpen }) => {
   return (
     <section className="main">
        <div className="main__overlay">
-        <Header />
+        <Header
+          onLogin={onLogin}
+          onMenuClick={onMenuClick}
+          isMenuOpen={isMenuOpen}
+        />
         <SearchForm />
       </div>
       <Preloader />

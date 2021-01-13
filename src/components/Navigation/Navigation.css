@@ -67,3 +67,28 @@
     padding-bottom: 24px;
   }
 }
+
+@media screen and (max-width: 675px) {
+  .navigation {
+    margin: 0 0 22px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .navigation__item {
+    font-size: 18px;
+    line-height: 56px;
+    padding-left: 16px;
+  }
+  .navigation__item-main_active {
+    padding-bottom: 0;
+  }
+  .navigation__item-news_active {
+    padding-bottom: 0;
+  }
+  .navigation__item-main_active::after {
+    display:none;
+  }
+  .navigation__item-news_active::after {
+    display:none;
+  }
+}
