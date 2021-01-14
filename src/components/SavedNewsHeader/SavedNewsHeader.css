@@ -50,3 +50,13 @@
     font-size: 14px;
   }
 }
+
+@media screen and (max-width: 675px) {
+  .saved-news-header {
+    padding-top: 8px;
+    padding-bottom: 32px;
+  }
+  .saved-news-header__words {
+    font-size: 18px;
+  }
+}
