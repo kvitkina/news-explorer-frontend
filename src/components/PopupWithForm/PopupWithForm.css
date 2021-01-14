@@ -134,3 +134,32 @@
 .popup__container_theme_tooltip {
   padding: 43px 36px 51px;
 }
+
+@media screen and (max-width: 455px) {
+  .popup {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  .popup__container {
+    width: 375px;
+    position: absolute;
+    top: 56px;
+    left: center;
+  }
+  .popup__input {
+    min-width: 288px;
+  }
+  .popup__redirect {
+    margin-bottom: 252px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .popup__container {
+    width: 320px;
+    padding: 16px 16px 28px;
+    left: 0;
+  }
+  .popup__input {
+    min-width: 288px;
+  }
+}

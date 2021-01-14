@@ -6,8 +6,9 @@ import Navigation from '../Navigation/Navigation';
 import Button from '../Button/Button';
 import LogoutIcon from '../icons/LogoutIcon';
 import MenuIcon from '../icons/MenuIcon';
+import CloseIcon from '../icons/CloseIcon';
 
-const Header = ({ onLogin, onMenuClick, isMenuOpen }) => {
+const Header = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose, onOverlayClose }) => {
     const location = useLocation();
     const path = location.pathname;
 
@@ -21,6 +22,7 @@ const Header = ({ onLogin, onMenuClick, isMenuOpen }) => {
       >
       <Link to='/' className={`logo ${path === '/saved-news' && 'logo_saved-news'}`}>NewsExplorer</Link>
       <MenuIcon onClick={onMenuClick} isMenuOpen={isMenuOpen}/>
+      <CloseIcon isMenuOpen={isMenuOpen} onClick={onMenuClose}/>
       <div className={` header__container ${isMenuOpen && 'header__container_visible'}`}>
         <Navigation />
         {path === '/' ?

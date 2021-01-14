@@ -68,6 +68,7 @@
   background-color: #2F71E5;
   border: none;
   margin-bottom: 16px;
+  align-self: center;
 }
 
 .button_popup:hover {
@@ -93,12 +94,15 @@
 }
 
 @media screen and (max-width: 675px) {
+  .button_header-auth {
+    align-self: center;
+    height: 56px;
+  }
+}
+
+@media screen and (max-width: 600px) {
   .button {
     width: 288px;
-  }
-  .button_header-auth {
-    height: 56px;
-    align-self: center;
   }
   .button_search {
     position: relative;

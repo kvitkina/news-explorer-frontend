@@ -19,6 +19,10 @@ function App() {
     setIsMenuOpen(true)
   }
 
+  const closeMenu = () => {
+    setIsMenuOpen(false)
+  }
+
   const handleLoginClick = () => {
     setIsRegisterPopupOpen(false)
     setIsLoginPopupOpen(true)
@@ -45,6 +49,7 @@ function App() {
     const handleEscClose = (evt) => {
       if (evt.key === 'Escape') {
         closeAllPopups();
+        closeMenu();
       }
     };
     document.addEventListener('keydown', handleEscClose);
@@ -65,6 +70,7 @@ function App() {
             onLogin={handleLoginClick}
             onMenuClick={handleMenuClick}
             isMenuOpen={isMenuOpen}
+            onMenuClose={closeMenu}
           />
         </Route>
         <Route exact path="/saved-news">

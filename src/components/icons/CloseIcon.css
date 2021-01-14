@@ -11,12 +11,17 @@
 }
 
 @media screen and (max-width: 675px) {
+  .close-icon {
+    display: none;
+  }
   .close-icon_menu {
     width: 24px;
     height: 24px;
     display: none;
+    position: inherit;
   }
   .close-icon_menu_visible {
     display: block;
   }
 }
+

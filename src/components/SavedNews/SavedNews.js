@@ -6,10 +6,12 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import Header from '../Header/Header';
 
 
-const SavedNews = () => {
+const SavedNews = ({ onMenuClick, isMenuOpen }) => {
   return (
     <section className="saved-news">
-      <Header />
+      <Header
+        onMenuClick={onMenuClick}
+        isMenuOpen={isMenuOpen}/>
       <SavedNewsHeader />
       <NewsCardList />
     </section>
