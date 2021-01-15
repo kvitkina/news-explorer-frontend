@@ -15,14 +15,14 @@ const PopupWithForm = ({
           <fieldset className="popup__form">
             {children}
             <Button name={buttonName} modifier="popup"/>
-            <div className="popup__redirect">
+          </fieldset>
+        </form>
+        <div className="popup__redirect">
               <p className="popup__word">или</p>
               <button className="popup__word popup__word_link" onClick={onCurrentPopupOpen}>
                 {linkName}
               </button>
             </div>
-          </fieldset>
-        </form>
       </div>
     </section>
   )

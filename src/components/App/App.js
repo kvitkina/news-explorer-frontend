@@ -8,12 +8,11 @@ import RegisterPopup from '../RegisterPopup/RegisterPopup';
 import LoginPopup from '../LoginPopup/LoginPopup';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
-function App() {
+const App = () => {
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
 
   const handleMenuClick = () => {
     setIsMenuOpen(true)

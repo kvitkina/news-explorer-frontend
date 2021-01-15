@@ -38,7 +38,7 @@ const NewsCard = ({ image, date, title, subtitle, link, href}) => {
           content={path ==="/" ? "Войдите, чтобы сохранять статьи" : "Убрать из сохранённых"}
           modifier="tooltip"
         />
-      <img src={image} className="card__image" alt=""/>
+      <img src={image} className="card__image" alt={title}/>
       <div className="card__description">
         <p className="card__date">{date}</p>
         <div className="card__text-container">

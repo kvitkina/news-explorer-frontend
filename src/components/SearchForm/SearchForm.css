@@ -43,7 +43,6 @@
   color: #B6BCBF;
   padding-left: 24px;
   box-sizing: border-box;
-  outline: none;
 }
 
 .search__input:focus {

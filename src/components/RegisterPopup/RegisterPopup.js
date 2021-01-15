@@ -32,7 +32,7 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen }) =>
       <div className="popup__input-container">
         <input
           type="email"
-          id="email"
+          id="reg-email"
           name="email"
           value={email || ''}
           onChange={handleEmailChange}
@@ -40,13 +40,13 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen }) =>
           placeholder="Введите почту"
           required
         />
-        <span className="popup__input-error" id="email-error"></span>
+        <span className="popup__input-error" id="email-reg-error"></span>
       </div>
       <h4 className="popup__input-name">Пароль</h4>
       <div className="popup__input-container">
         <input
           type="password"
-          id="password"
+          id="reg-password"
           name="password"
           value={password || ''}
           onChange={handlePasswordChange}
@@ -56,7 +56,7 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen }) =>
           maxLength="12"
           required
         />
-        <span className="popup__input-error" id="password-error"></span>
+        <span className="popup__input-error" id="password-reg-error"></span>
         </div>
         <h4 className="popup__input-name">Имя</h4>
           <input
