@@ -71,7 +71,7 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen }) =>
             maxLength="40"
             required
           />
-          <span className="popup__input-error" id="email-error"></span>
+          <span className="popup__input-error" id="name-error"></span>
     </PopupWithForm>
   )
 }
