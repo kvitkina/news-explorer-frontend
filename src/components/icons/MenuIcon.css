@@ -1,0 +1,18 @@
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.menu-icon:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 675px) {
+  .menu-icon {
+    display: block;
+  }
+  .menu-icon_hidden {
+    display: none;
+  }
+}

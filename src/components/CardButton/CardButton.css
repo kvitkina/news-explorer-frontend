@@ -1,0 +1,45 @@
+.card-button {
+  height: 40px;
+  width: 40px;
+  background-color: #fff;
+  border: none;
+  border-radius: 8px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  cursor: pointer;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  color: #000;
+}
+
+.card-button_tooltip {
+  width: max-content;
+  border-radius: 10px;
+  right: 69px;
+  padding: 16px 12px;
+  text-align: center;
+  opacity: 0;
+  transition: .4s;
+}
+
+.card-button:hover ~ .card-button_tooltip {
+  opacity: 1;
+  transition: .4s;
+}
+
+.card-button_keyword {
+  left: 24px;
+  width: min-content;
+  max-width: 112px;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 8px 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
