@@ -4,9 +4,10 @@ import '../NewsCard/NewsCard.css';
 import CardButton from '../CardButton/CardButton';
 import BookmarkIcon from '../icons/BookmarkIcon';
 import TrashIcon from '../icons/TrashIcon';
-
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const NewsCard = ({ image, date, title, subtitle, link, href}) => {
+  const currentUser = React.useContext(CurrentUserContext);
   const [ isHovered, setIsHovered ] = React.useState(false)
 
   const handleMouseEnter = () => {

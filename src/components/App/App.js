@@ -7,12 +7,15 @@ import SavedNews from '../SavedNews/SavedNews';
 import RegisterPopup from '../RegisterPopup/RegisterPopup';
 import LoginPopup from '../LoginPopup/LoginPopup';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute';
 
 const App = () => {
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState({});
 
   const handleMenuClick = () => {
     setIsMenuOpen(true)
@@ -62,42 +65,44 @@ const App = () => {
   };
 
   return (
-    <div className="page">
-      <Switch>
-        <Route exact path="/">
-          <Main
-            onLogin={handleLoginClick}
-            onMenuClick={handleMenuClick}
-            isMenuOpen={isMenuOpen}
-            onMenuClose={closeMenu}
-          />
-        </Route>
-        <Route exact path="/saved-news">
-          <SavedNews />
-        </Route>
-      </Switch>
-      <Footer />
-      <RegisterPopup
-        onClose={closeAllPopups}
-        isOpen={isRegisterPopupOpen}
-        onOverlayClose={handleOverlayClose}
-        onLoginPopupOpen={handleLoginClick}
-      />
-      <LoginPopup
-        onClose={closeAllPopups}
-        isOpen={isLoginPopupOpen}
-        onOverlayClose={handleOverlayClose}
-        onRegisterPopupOpen={handleRegisterClick}
-      />
-      <InfoTooltip
-        onClose={closeAllPopups}
-        isOpen={isInfoTooltipOpen}
-        title="Пользователь успешно зарегистрирован!"
-        onCurrentPopupOpen={handleLoginClick}
-        linkName="Войти"
-        onOverlayClose={handleOverlayClose}
-      />
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Switch>
+          <Route exact path="/">
+            <Main
+              onLogin={handleLoginClick}
+              onMenuClick={handleMenuClick}
+              isMenuOpen={isMenuOpen}
+              onMenuClose={closeMenu}
+            />
+          </Route>
+          <ProtectedRoute exact path="/saved-news">
+            <SavedNews />
+          </ProtectedRoute>
+        </Switch>
+        <Footer />
+        <RegisterPopup
+          onClose={closeAllPopups}
+          isOpen={isRegisterPopupOpen}
+          onOverlayClose={handleOverlayClose}
+          onLoginPopupOpen={handleLoginClick}
+        />
+        <LoginPopup
+          onClose={closeAllPopups}
+          isOpen={isLoginPopupOpen}
+          onOverlayClose={handleOverlayClose}
+          onRegisterPopupOpen={handleRegisterClick}
+        />
+        <InfoTooltip
+          onClose={closeAllPopups}
+          isOpen={isInfoTooltipOpen}
+          title="Пользователь успешно зарегистрирован!"
+          onCurrentPopupOpen={handleLoginClick}
+          linkName="Войти"
+          onOverlayClose={handleOverlayClose}
+        />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

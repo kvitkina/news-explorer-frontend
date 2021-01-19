@@ -8,8 +8,8 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
 
-
 const Main = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose }) => {
+
   return (
     <section className="main">
        <div className="main__overlay">
