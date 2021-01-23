@@ -7,10 +7,12 @@ import Button from '../Button/Button';
 import LogoutIcon from '../icons/LogoutIcon';
 import MenuIcon from '../icons/MenuIcon';
 import CloseIcon from '../icons/CloseIcon';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const Header = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose, onOverlayClose }) => {
-    const location = useLocation();
-    const path = location.pathname;
+const Header = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose, onSignOut, loggedIn }) => {
+  const location = useLocation();
+  const path = location.pathname;
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <section
@@ -24,10 +26,10 @@ const Header = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose, onOverlayClose 
       <MenuIcon onClick={onMenuClick} isMenuOpen={isMenuOpen}/>
       <CloseIcon isMenuOpen={isMenuOpen} onClick={onMenuClose}/>
       <div className={` header__container ${isMenuOpen && 'header__container_visible'}`}>
-        <Navigation />
-        {path === '/' ?
+        <Navigation onLogin={onLogin} loggedIn={loggedIn} />
+        {!loggedIn ?
           <Button name="Авторизироваться" modifier="header-auth" onClick={onLogin} /> :
-          <Button name="Грета" icon={<LogoutIcon/>} modifier="header-name"/>
+          <Button name={currentUser.name} icon={<LogoutIcon onSubmit={onSignOut}/>} modifier="header-name"/>
         }
       </div>
     </section>

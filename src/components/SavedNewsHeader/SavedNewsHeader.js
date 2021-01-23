@@ -1,8 +1,11 @@
 import React from 'react';
 import '../SavedNewsHeader/SavedNewsHeader.css';
 import '../App/App.css';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const SavedNewsHeader = () => {
+  const currentUser = React.useContext(CurrentUserContext);
+
   return (
     <section className="saved-news-header page__section">
       <p className="saved-news-header__page-name">Сохраненные статьи</p>

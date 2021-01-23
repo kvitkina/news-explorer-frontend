@@ -4,10 +4,8 @@ import '../NewsCard/NewsCard.css';
 import CardButton from '../CardButton/CardButton';
 import BookmarkIcon from '../icons/BookmarkIcon';
 import TrashIcon from '../icons/TrashIcon';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const NewsCard = ({ image, date, title, subtitle, link, href}) => {
-  const currentUser = React.useContext(CurrentUserContext);
+const NewsCard = ({ article }) => {
   const [ isHovered, setIsHovered ] = React.useState(false)
 
   const handleMouseEnter = () => {
@@ -39,14 +37,14 @@ const NewsCard = ({ image, date, title, subtitle, link, href}) => {
           content={path ==="/" ? "Войдите, чтобы сохранять статьи" : "Убрать из сохранённых"}
           modifier="tooltip"
         />
-      <img src={image} className="card__image" alt={title}/>
+      <img src={article.urlToImage} className="card__image" alt={article.title}/>
       <div className="card__description">
-        <p className="card__date">{date}</p>
+        <p className="card__date">{article.publishedAt}</p>
         <div className="card__text-container">
-          <h3 className="card__title">{title}</h3>
-          <p className="card__subtitle">{subtitle}</p>
+          <h3 className="card__title">{article.title}</h3>
+          <p className="card__subtitle">{article.description}</p>
         </div>
-        <a href={href} className="card__link">{link}</a>
+        <a href={article.url} className="card__link">{article.source.name}</a>
       </div>
     </li>
   )

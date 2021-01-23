@@ -69,6 +69,7 @@
   border: none;
   margin-bottom: 16px;
   align-self: center;
+  position: relative;
 }
 
 .button_popup:hover {

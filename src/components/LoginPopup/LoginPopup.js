@@ -2,7 +2,7 @@ import React from 'react';
 import '../PopupWithForm/PopupWithForm.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-const LoginPopup = ({ onClose, isOpen, onOverlayClose, onRegisterPopupOpen }) => {
+const LoginPopup = ({ onClose, isOpen, onOverlayClose, onRegisterPopupOpen, onLogin }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -12,6 +12,10 @@ const LoginPopup = ({ onClose, isOpen, onOverlayClose, onRegisterPopupOpen }) =>
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    onLogin(email,password)
+  }
 
   return (
     <PopupWithForm
@@ -23,6 +27,7 @@ const LoginPopup = ({ onClose, isOpen, onOverlayClose, onRegisterPopupOpen }) =>
       isOpen={isOpen}
       onOverlayClose={onOverlayClose}
       onCurrentPopupOpen={onRegisterPopupOpen}
+      onSubmit={handleSubmit}
     >
       <h4 className="popup__input-name">Email</h4>
       <div className="popup__input-container">

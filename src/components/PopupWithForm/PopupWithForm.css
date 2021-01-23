@@ -81,6 +81,11 @@
   display: inline;
 }
 
+.popup__input-error_type_submit {
+  left: 25%;
+  top: -22px;
+}
+
 .popup__form {
   border: none;
   padding: 0;

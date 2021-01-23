@@ -2,7 +2,7 @@ import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import '../PopupWithForm/PopupWithForm.css';
 
-const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen }) => {
+const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen, onRegister, submitError }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('');
@@ -16,6 +16,10 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen }) =>
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    onRegister(email,password,name)
+  }
 
   return (
     <PopupWithForm
@@ -27,6 +31,8 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen }) =>
       isOpen={isOpen}
       onOverlayClose={onOverlayClose}
       onCurrentPopupOpen={onLoginPopupOpen}
+      onSubmit={handleSubmit}
+      submitError={submitError}
     >
       <h4 className="popup__input-name">Email</h4>
       <div className="popup__input-container">
@@ -59,6 +65,7 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen }) =>
         <span className="popup__input-error" id="password-reg-error"></span>
         </div>
         <h4 className="popup__input-name">Имя</h4>
+        <div className="popup__input-container">
           <input
             type="text"
             id="name"
@@ -72,6 +79,7 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen }) =>
             required
           />
           <span className="popup__input-error" id="name-error"></span>
+          </div>
     </PopupWithForm>
   )
 }

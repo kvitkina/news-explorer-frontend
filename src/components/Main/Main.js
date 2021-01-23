@@ -7,8 +7,10 @@ import SearchForm from '../SearchForm/SearchForm';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const Main = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose }) => {
+const Main = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose, articles, preloader, notFound, loggedIn }) => {
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <section className="main">
@@ -18,12 +20,13 @@ const Main = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose }) => {
           onMenuClick={onMenuClick}
           isMenuOpen={isMenuOpen}
           onMenuClose={onMenuClose}
+          loggedIn={loggedIn}
         />
         <SearchForm />
       </div>
-      <Preloader />
-      <NotFound />
-      <NewsCardList />
+      {preloader && <Preloader />}
+      {notFound && <NotFound />}
+      <NewsCardList articles={articles} />
       <About />
     </section>
   )
