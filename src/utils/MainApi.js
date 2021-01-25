@@ -15,45 +15,45 @@ class MainApi {
     return Promise.all([this.getInitialArticles(), this.getUserInfo()]);
   }
 
-  getInitialArticles(token) {
+  getInitialArticles() {
     return fetch(`${this.baseUrl}/articles`, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this.handleOriginalResponse);
   }
 
-  addArticle(item, token) {
+  addArticle(item) {
     return fetch(`${this.baseUrl}/articles`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify(item),
     }).then(this.handleOriginalResponse);
   }
 
-  deleteArticle(articleId, token) {
+  deleteArticle(articleId) {
     return fetch(`${this.baseUrl}/articles/${articleId}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this.handleOriginalResponse);
   }
 
-  getUserInfo(token) {
+  getUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this.handleOriginalResponse);
   }

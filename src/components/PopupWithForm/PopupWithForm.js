@@ -16,7 +16,7 @@ const PopupWithForm = ({
             {children}
             <div className="popup__input-container">
               <span className="popup__input-error popup__input-error_type_submit" id="submit-error">{submitError}</span>
-              <Button name={buttonName} modifier="popup"/>
+              <Button name={buttonName} modifier="popup" type="submit"/>
             </div>
           </fieldset>
         </form>

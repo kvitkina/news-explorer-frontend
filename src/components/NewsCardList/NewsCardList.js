@@ -6,7 +6,7 @@ import Button from '../Button/Button';
 import NewsCard from '../NewsCard/NewsCard';
 
 
-const NewsCardList = ({ articles }) => {
+const NewsCardList = ({ articles, loggedIn, keyword }) => {
   const location = useLocation();
     const path = location.pathname;
   return (
@@ -17,6 +17,8 @@ const NewsCardList = ({ articles }) => {
          return <NewsCard
            article={article}
            key={article.source.id}
+           loggedIn={loggedIn}
+           keyword={keyword}
          />
        })}
       </ul>

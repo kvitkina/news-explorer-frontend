@@ -15,12 +15,12 @@ export const register = (email, password, name) => fetch(`${BASE_URL}/signup`, {
     return Promise.reject(new Error(`Что-то пошло не так: ${res.status}`));
   });
 
-export const getContent = (token) => fetch(`${BASE_URL}/users/me`, {
+export const getContent = () => fetch(`${BASE_URL}/users/me`, {
   method: 'GET',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
   },
 })
   .then((res) => {
@@ -46,7 +46,7 @@ export const authorize = (email, password) => fetch(`${BASE_URL}/signin`, {
   })
   .then((data) => {
     if (data.token) {
-      localStorage.setItem('jwt', data.jwt);
+      localStorage.setItem('token', data.token);
       return data;
     }
   });

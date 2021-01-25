@@ -9,7 +9,7 @@ import MenuIcon from '../icons/MenuIcon';
 import CloseIcon from '../icons/CloseIcon';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const Header = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose, onSignOut, loggedIn }) => {
+const Header = ({ onLoginClick, onMenuClick, isMenuOpen, onMenuClose, onSignOut, loggedIn }) => {
   const location = useLocation();
   const path = location.pathname;
   const currentUser = React.useContext(CurrentUserContext);
@@ -26,10 +26,10 @@ const Header = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose, onSignOut, logg
       <MenuIcon onClick={onMenuClick} isMenuOpen={isMenuOpen}/>
       <CloseIcon isMenuOpen={isMenuOpen} onClick={onMenuClose}/>
       <div className={` header__container ${isMenuOpen && 'header__container_visible'}`}>
-        <Navigation onLogin={onLogin} loggedIn={loggedIn} />
+        <Navigation loggedIn={loggedIn} />
         {!loggedIn ?
-          <Button name="Авторизироваться" modifier="header-auth" onClick={onLogin} /> :
-          <Button name={currentUser.name} icon={<LogoutIcon onSubmit={onSignOut}/>} modifier="header-name"/>
+          <Button name="Авторизироваться" modifier="header-auth" onClick={onLoginClick} /> :
+          <Button name={currentUser.name} icon={<LogoutIcon onClick={onSignOut}/>} modifier="header-name"/>
         }
       </div>
     </section>

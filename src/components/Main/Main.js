@@ -9,24 +9,43 @@ import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const Main = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose, articles, preloader, notFound, loggedIn }) => {
+const Main = ({
+  onLoginClick,
+  onSignOut,
+  onMenuClick,
+  isMenuOpen,
+  onMenuClose,
+  articles,
+  preloader,
+  notFound,
+  loggedIn,
+  onSearchNews,
+  keyword,
+  setKeyword,
+  haveNews
+}) => {
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <section className="main">
        <div className="main__overlay">
         <Header
-          onLogin={onLogin}
+          onLoginClick={onLoginClick}
           onMenuClick={onMenuClick}
           isMenuOpen={isMenuOpen}
           onMenuClose={onMenuClose}
           loggedIn={loggedIn}
+          onSignOut={onSignOut}
         />
-        <SearchForm />
+        <SearchForm
+          keyword={keyword}
+          onSearchNews={onSearchNews}
+          setKeyword={setKeyword}
+        />
       </div>
       {preloader && <Preloader />}
       {notFound && <NotFound />}
-      <NewsCardList articles={articles} />
+      {haveNews && <NewsCardList articles={articles} loggedIn={loggedIn} />}
       <About />
     </section>
   )

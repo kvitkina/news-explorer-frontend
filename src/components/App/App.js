@@ -9,8 +9,9 @@ import LoginPopup from '../LoginPopup/LoginPopup';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute';
-import newsApi from '../../utils/NewsApi';
 import * as auth from '../../utils/auth';
+import * as newsApi from '../../utils/NewsApi';
+
 
 const App = () => {
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
@@ -19,28 +20,61 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [articles, setArticles] = React.useState([]);
+  const [keyword, setKeyword] = React.useState('');
   const [submitError, setSubmitError] = React.useState('');
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [name, setName] = React.useState("");
   const [preloader, setPreloader] = React.useState(false);
   const [notFound, setNotFound] = React.useState(false);
+  const [haveNews, setHaveNews] = React.useState(false)
   const history = useHistory();
 
-  // React.useEffect(() => {
-  //   newsApi.getNews()
-  //   .then((res) => {
-  //     setArticles(res)
-  //   })
-  //   .catch((err) => console.log(err));
-  // },[])
+// поиск новостей по ключевому слову
+  const onSearchNews = (keyword) => {
+    localStorage.removeItem('articles');
+    localStorage.removeItem('keyword');
+    setHaveNews(false)
+    setPreloader(true)
+    setNotFound(false)
+    newsApi.getNews(keyword)
+    .then((res) => {
+      localStorage.setItem('articles', JSON.stringify(res.articles));
+      localStorage.setItem('keyword', keyword);
+      setArticles(res.articles)
+      setKeyword(keyword)
+      setHaveNews(true)
+      if(res.articles.length === 0) {
+        setNotFound(true)
+        setHaveNews(false)
+      }
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      setPreloader(false)
+    })
+  }
+
+  React.useEffect(() => {
+    tokenCheck();
+    const articles = localStorage.getItem('articles')
+    ? JSON.parse(localStorage.getItem('articles'))
+    : [];
+    setArticles(articles)
+    const keyword = localStorage.getItem('keyword');
+    setKeyword(keyword)
+    setHaveNews(true)
+    if(articles.length === 0) {
+      setHaveNews(false)
+    }
+  }, []);
 
 // регистрация
   const onRegister = (email, password, name) => {
     auth.register(email, password, name)
     .then((res) => {
       if(res) {
-        setIsRegisterPopupOpen(false)
-        handleTooltip()
+        setIsRegisterPopupOpen(false);
+        handleTooltip();
+        history.push("/");
       }
     })
     .catch((err) => {
@@ -56,10 +90,11 @@ const App = () => {
 // авторизация
   const onLogin = (email, password) => {
     auth.authorize(email, password)
-    .then((res) => {
-      if(res.jwt) {
-        localStorage.setItem('jwt', res.jwt);
+    .then((data) => {
+      if(data.token) {
         setLoggedIn(true);
+        setCurrentUser({ name: data.name, id: data._id });
+        history.push('/');
         closeAllPopups();
       }
     })
@@ -75,9 +110,9 @@ const App = () => {
 
   // проверка токена
   const tokenCheck= () => {
-    const jwt = localStorage.getItem('jwt');
-    if(jwt) {
-      auth.getContent(jwt)
+    const token = localStorage.getItem('token');
+    if(token) {
+      auth.getContent(token)
       .then((res) => {
         if(res) {
           setLoggedIn(true);
@@ -93,16 +128,17 @@ const App = () => {
     }
   }
 
-  React.useEffect(() => {
-    tokenCheck();
-  }, []);
-
+  // выход
   const onSignOut = () => {
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('keyword');
+    localStorage.removeItem('articles');
+    localStorage.removeItem('keyword');
     setLoggedIn(false);
+    setHaveNews(false)
     history.push('/');
   };
 
+  // блок с "открыть/закрыть"
   const handleMenuClick = () => {
     setIsMenuOpen(true)
   }
@@ -122,12 +158,17 @@ const App = () => {
     setIsRegisterPopupOpen(true)
   };
 
+  const handleTooltip = () => {
+    setIsInfoTooltipOpen(true);
+  };
+
   const closeAllPopups = () => {
     setIsRegisterPopupOpen(false)
     setIsLoginPopupOpen(false)
     setIsInfoTooltipOpen(false)
   };
 
+  // закрытие попапов по клику на overlay
   const handleOverlayClose = (e) => {
     if (e.target !== e.currentTarget) {
       return;
@@ -135,6 +176,7 @@ const App = () => {
     closeAllPopups();
   };
 
+  // закрытие попапов по клику на Escape
   React.useEffect(() => {
     const handleEscClose = (evt) => {
       if (evt.key === 'Escape') {
@@ -148,9 +190,6 @@ const App = () => {
     };
   }, []);
 
-  const handleTooltip = () => {
-    setIsInfoTooltipOpen(true);
-  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -158,14 +197,19 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <Main
-              onLogin={handleLoginClick}
+              onLoginClick={handleLoginClick}
               onMenuClick={handleMenuClick}
               isMenuOpen={isMenuOpen}
               onMenuClose={closeMenu}
+              onSignOut={onSignOut}
               articles={articles}
               preloader={preloader}
               notFound={notFound}
               loggedIn={loggedIn}
+              onSearchNews={onSearchNews}
+              keyword={keyword}
+              setKeyword={setKeyword}
+              haveNews={haveNews}
             />
           </Route>
           <ProtectedRoute
@@ -173,6 +217,8 @@ const App = () => {
             component={SavedNews}
             onSignOut={onSignOut}
             loggedIn={loggedIn}
+            articles={articles}
+            keyword={keyword}
           >
           </ProtectedRoute>
         </Switch>
