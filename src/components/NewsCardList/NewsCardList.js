@@ -22,7 +22,7 @@ const NewsCardList = ({ articles, savedArticles, loggedIn, keyword, onArticleSav
        {articles.map((article, i) => {
          return <NewsCard
            key={i}
-           _id={article.url}
+           _id={article._id}
            link={article.url}
            image={article.urlToImage}
            title={article.title}

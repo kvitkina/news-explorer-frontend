@@ -82,25 +82,27 @@ const App = () => {
 
 // сохранениe статьи
   const handleSaveArticle = (newArticle) => {
-    mainApi.addArticle({...newArticle, keyword})
-    .then((res) => {
-      const newArticles = articles.map((article) => {
-        if(article.url === res.link) {
-          return {...article, _id: res._id, owner: res.owner}
-        }
-        return article
+    if(loggedIn) {
+      mainApi.addArticle({...newArticle, keyword})
+      .then((res) => {
+        const newArticles = articles.map((article) => {
+          if(article.url === res.link) {
+            return {...article, _id: res._id}
+          }
+          return article
+        })
+        setArticles(newArticles)
+        setSavedArticles([res, ...savedArticles])
       })
-      setArticles(newArticles)
-      setSavedArticles([...savedArticles, newArticle])
-    })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
+    }
   }
 
 // удаление статьи
-  const handleDeleteArticle = (id) => {
-    mainApi.deleteArticle(id)
-    .then(() => {
-      const newArticles = articles.filter((item) => item._id !== id);
+  const handleDeleteArticle = (_id) => {
+    mainApi.deleteArticle(_id)
+    .then((res) => {
+      const newArticles = savedArticles.filter((item) => item._id !== res._id);
       setSavedArticles(newArticles)
     })
     .catch(err => console.log(err))
