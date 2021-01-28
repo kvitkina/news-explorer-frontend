@@ -6,7 +6,7 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import Header from '../Header/Header';
 
 
-const SavedNews = ({ onMenuClick, isMenuOpen, onSignOut, loggedIn, articles, keyword }) => {
+const SavedNews = ({ onMenuClick, isMenuOpen, onSignOut, loggedIn, savedArticles, keyword }) => {
   return (
     <section className="saved-news">
       <Header
@@ -15,8 +15,11 @@ const SavedNews = ({ onMenuClick, isMenuOpen, onSignOut, loggedIn, articles, key
         onSignOut={onSignOut}
         loggedIn={loggedIn}
       />
-      <SavedNewsHeader />
-      <NewsCardList articles={articles} loggedIn={loggedIn} keyword={keyword} />
+      <SavedNewsHeader savedArticles={savedArticles} />
+      <NewsCardList
+        loggedIn={loggedIn}
+        keyword={keyword}
+        savedArticles={savedArticles} />
     </section>
   )
 }

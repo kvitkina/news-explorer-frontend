@@ -7,7 +7,6 @@ import SearchForm from '../SearchForm/SearchForm';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const Main = ({
   onLoginClick,
@@ -22,9 +21,10 @@ const Main = ({
   onSearchNews,
   keyword,
   setKeyword,
-  haveNews
+  haveNews,
+  onArticleSave,
+  onArticleDelete
 }) => {
-  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <section className="main">
@@ -45,7 +45,14 @@ const Main = ({
       </div>
       {preloader && <Preloader />}
       {notFound && <NotFound />}
-      {haveNews && <NewsCardList articles={articles} loggedIn={loggedIn} />}
+      {haveNews &&
+        <NewsCardList
+          articles={articles}
+          loggedIn={loggedIn}
+          onArticleSave={onArticleSave}
+          onArticleDelete={onArticleDelete}
+        />
+      }
       <About />
     </section>
   )

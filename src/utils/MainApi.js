@@ -15,7 +15,7 @@ class MainApi {
     return Promise.all([this.getInitialArticles(), this.getUserInfo()]);
   }
 
-  getInitialArticles() {
+  getSavedArticles() {
     return fetch(`${this.baseUrl}/articles`, {
       headers: {
         Accept: 'application/json',

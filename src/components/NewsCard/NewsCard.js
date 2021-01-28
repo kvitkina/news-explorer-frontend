@@ -4,9 +4,12 @@ import '../NewsCard/NewsCard.css';
 import CardButton from '../CardButton/CardButton';
 import BookmarkIcon from '../icons/BookmarkIcon';
 import TrashIcon from '../icons/TrashIcon';
+import BookmarkIconActive from '../icons/BookmarkIconActive';
 
-const NewsCard = ({ article, loggedIn, keyword }) => {
-  const [ isHovered, setIsHovered ] = React.useState(false)
+
+const NewsCard = ({ _id, title, text, date, source, link, image, owner, loggedIn, keyword, onArticleSave, onArticleDelete }) => {
+  const [ isHovered, setIsHovered ] = React.useState(false);
+  const [ isSaved, setIsSaved] = React.useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true)
@@ -15,36 +18,51 @@ const NewsCard = ({ article, loggedIn, keyword }) => {
     setIsHovered(false)
   }
 
+  const handleBookmarkIconClick = () => {
+    onArticleSave({ keyword, title, text, date, source, link, image, owner })
+    setIsSaved(true)
+  }
+  const handleTrashIconClick = () => {
+    onArticleDelete(_id)
+    setIsSaved(false)
+  }
+
   const location = useLocation();
   const path = location.pathname;
   return (
     <li className="card">
       {path === "/saved-news" && <CardButton modifier="keyword" content={keyword} />}
-        <CardButton
-          content={path ==="/" ? <BookmarkIcon
-            hover={isHovered}
-            onHoverEnter={handleMouseEnter}
-            onHoverLeave={handleMouseLeave}
-          />
-         :
-         <TrashIcon
-          hover={isHovered}
-          onHoverEnter={handleMouseEnter}
-          onHoverLeave={handleMouseLeave}
-         />}
-        />
+      {path ==="/" ? <CardButton
+          content={!isSaved ?
+            <BookmarkIcon
+              hover={isHovered}
+              onHoverEnter={handleMouseEnter}
+              onHoverLeave={handleMouseLeave}
+              onClick={handleBookmarkIconClick}
+            />
+          : <BookmarkIconActive onClick={handleTrashIconClick} /> }
+           />
+          : <CardButton
+          content= {<TrashIcon
+              hover={isHovered}
+              onHoverEnter={handleMouseEnter}
+              onHoverLeave={handleMouseLeave}
+              onClick={handleTrashIconClick}
+          /> }/>
+            }
+
         {!loggedIn &&<CardButton
           content={path ==="/" ? "Войдите, чтобы сохранять статьи" : "Убрать из сохранённых"}
           modifier="tooltip"
         />}
-      <img src={article.urlToImage} className="card__image" alt={article.title}/>
+      <img src={image} className="card__image" alt={title}/>
       <div className="card__description">
-        <p className="card__date">{article.publishedAt}</p>
+        <p className="card__date">{date}</p>
         <div className="card__text-container">
-          <h3 className="card__title">{article.title}</h3>
-          <p className="card__subtitle">{article.description}</p>
+          <h3 className="card__title">{title}</h3>
+          <p className="card__subtitle">{text}</p>
         </div>
-        <a href={article.url} className="card__link">{article.source.name}</a>
+        <a href={link} target="_blank" rel="noreferrer" className="card__link">{source}</a>
       </div>
     </li>
   )

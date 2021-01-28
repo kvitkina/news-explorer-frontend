@@ -11,6 +11,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute';
 import * as auth from '../../utils/auth';
 import * as newsApi from '../../utils/NewsApi';
+import mainApi from '../../utils/MainApi';
 
 
 const App = () => {
@@ -25,8 +26,20 @@ const App = () => {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [preloader, setPreloader] = React.useState(false);
   const [notFound, setNotFound] = React.useState(false);
-  const [haveNews, setHaveNews] = React.useState(false)
+  const [haveNews, setHaveNews] = React.useState(false);
+  const [savedArticles, setSavedArticles] = React.useState([]);
   const history = useHistory();
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      mainApi.getSavedArticles()
+        .then((res) => { setSavedArticles(res); })
+        .catch((err) => console.log(err));
+      mainApi.getUserInfo()
+        .then((res) => { setCurrentUser(res); })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
 
 // поиск новостей по ключевому слову
   const onSearchNews = (keyword) => {
@@ -65,7 +78,33 @@ const App = () => {
     if(articles.length === 0) {
       setHaveNews(false)
     }
-  }, []);
+  }, [loggedIn]);
+
+// сохранениe статьи
+  const handleSaveArticle = (newArticle) => {
+    mainApi.addArticle({...newArticle, keyword})
+    .then((res) => {
+      const newArticles = articles.map((article) => {
+        if(article.url === res.link) {
+          return {...article, _id: res._id, owner: res.owner}
+        }
+        return article
+      })
+      setArticles(newArticles)
+      setSavedArticles([...savedArticles, newArticle])
+    })
+    .catch(err => console.log(err))
+  }
+
+// удаление статьи
+  const handleDeleteArticle = (id) => {
+    mainApi.deleteArticle(id)
+    .then(() => {
+      const newArticles = articles.filter((item) => item._id !== id);
+      setSavedArticles(newArticles)
+    })
+    .catch(err => console.log(err))
+  }
 
 // регистрация
   const onRegister = (email, password, name) => {
@@ -130,8 +169,6 @@ const App = () => {
 
   // выход
   const onSignOut = () => {
-    localStorage.removeItem('keyword');
-    localStorage.removeItem('articles');
     localStorage.removeItem('keyword');
     setLoggedIn(false);
     setHaveNews(false)
@@ -210,6 +247,8 @@ const App = () => {
               keyword={keyword}
               setKeyword={setKeyword}
               haveNews={haveNews}
+              onArticleSave={handleSaveArticle}
+              onArticleDelete={handleDeleteArticle}
             />
           </Route>
           <ProtectedRoute
@@ -219,6 +258,8 @@ const App = () => {
             loggedIn={loggedIn}
             articles={articles}
             keyword={keyword}
+            savedArticles={savedArticles}
+            onArticleDelete={handleDeleteArticle}
           >
           </ProtectedRoute>
         </Switch>

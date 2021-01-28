@@ -99,6 +99,10 @@
     align-self: center;
     height: 56px;
   }
+  .button_header-name {
+    align-self: center;
+    height: 56px;
+  }
 }
 
 @media screen and (max-width: 600px) {
