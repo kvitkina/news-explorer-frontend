@@ -264,6 +264,9 @@ const App = () => {
             keyword={keyword}
             savedArticles={savedArticles}
             onArticleDelete={handleDeleteArticle}
+            onMenuClick={handleMenuClick}
+            isMenuOpen={isMenuOpen}
+            onMenuClose={closeMenu}
           >
           </ProtectedRoute>
         </Switch>

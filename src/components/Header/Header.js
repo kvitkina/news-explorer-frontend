@@ -18,14 +18,17 @@ const Header = ({ onLoginClick, onMenuClick, isMenuOpen, onMenuClose, onSignOut,
     <section
       className={`header
         ${isMenuOpen && 'header_black'}
-        ${path === '/saved-news' && 'header_saved-news'}
+        ${path === '/saved-news' && 'header_saved-news header_white'}
         page__section`
       }
       >
       <Link to='/' className={`logo ${path === '/saved-news' && 'logo_saved-news'}`}>NewsExplorer</Link>
       <MenuIcon onClick={onMenuClick} isMenuOpen={isMenuOpen}/>
       <CloseIcon isMenuOpen={isMenuOpen} onClick={onMenuClose}/>
-      <div className={` header__container ${isMenuOpen && 'header__container_visible'}`}>
+      <div className={` header__container
+        ${isMenuOpen && 'header__container_visible'}
+        ${path === '/saved-news' && 'header__container_white'}
+        `}>
         <Navigation loggedIn={loggedIn} />
         {!loggedIn ?
           <Button name="Авторизироваться" modifier="header-auth" onClick={onLoginClick} /> :
