@@ -7,7 +7,7 @@ import TrashIcon from '../icons/TrashIcon';
 import BookmarkIconActive from '../icons/BookmarkIconActive';
 
 
-const NewsCard = ({ _id, title, text, date, source, link, image, owner, loggedIn, keyword, onArticleSave, onArticleDelete }) => {
+const NewsCard = ({ _id, title, text, date, source, link, image, owner, loggedIn, keyword, onArticleSave, onArticleDelete, onLoginClick }) => {
   const [ isHovered, setIsHovered ] = React.useState(false);
   const [ isSaved, setIsSaved] = React.useState(false);
 
@@ -38,7 +38,7 @@ const NewsCard = ({ _id, title, text, date, source, link, image, owner, loggedIn
               hover={isHovered}
               onHoverEnter={handleMouseEnter}
               onHoverLeave={handleMouseLeave}
-              onClick={handleBookmarkIconClick}
+              onClick={loggedIn ? handleBookmarkIconClick : onLoginClick}
             />
           : <BookmarkIconActive onClick={handleTrashIconClick} /> }
            />

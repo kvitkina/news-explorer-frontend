@@ -92,7 +92,7 @@ const App = () => {
           return article
         })
         setArticles(newArticles)
-        setSavedArticles([res, ...savedArticles])
+        setSavedArticles([...savedArticles, res])
       })
       .catch(err => console.log(err))
     }
@@ -171,6 +171,8 @@ const App = () => {
 
   // выход
   const onSignOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('articles');
     localStorage.removeItem('keyword');
     setLoggedIn(false);
     setHaveNews(false)

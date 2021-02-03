@@ -6,12 +6,12 @@ import Button from '../Button/Button';
 import NewsCard from '../NewsCard/NewsCard';
 
 
-const NewsCardList = ({ articles, savedArticles, loggedIn, keyword, onArticleSave, onArticleDelete }) => {
+const NewsCardList = ({ children, articlesToShow, onLoginClick, savedArticles, loggedIn, keyword, onArticleSave, onArticleDelete }) => {
   const location = useLocation();
-    const path = location.pathname;
+  const path = location.pathname;
 
-    // const [toShow, setToShow] = React.useState(3);
-    // const articlesToShow = articles.slice(0, toShow);
+  // const [toShow, setToShow] = React.useState(3);
+  // const articlesToShow = articles.slice(0, toShow);
 
   return (
     <>
@@ -19,7 +19,7 @@ const NewsCardList = ({ articles, savedArticles, loggedIn, keyword, onArticleSav
     <section className="cards page__section">
        <h2 className="cards__title">Результаты поиска</h2>
       <ul className="cards__list">
-       {articles.map((article, i) => {
+       {articlesToShow.map((article, i) => {
          return <NewsCard
            key={i}
            _id={article._id}
@@ -33,9 +33,11 @@ const NewsCardList = ({ articles, savedArticles, loggedIn, keyword, onArticleSav
            keyword={keyword}
            onArticleSave={onArticleSave}
            onArticleDelete={onArticleDelete}
+           onLoginClick={onLoginClick}
          />
        })}
       </ul>
+      {children}
       {/* {articles.length > 3 && <Button onClick={_ => setToShow(toShow + 3)} name="Показать еще" modifier="cards-list"/>} */}
       </section>}
 
@@ -59,8 +61,6 @@ const NewsCardList = ({ articles, savedArticles, loggedIn, keyword, onArticleSav
          />
        })}
       </ul>
-
-
     </section>}
 </>
   )

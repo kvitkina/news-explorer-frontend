@@ -7,6 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
+import Button from '../Button/Button';
 
 const Main = ({
   onLoginClick,
@@ -25,7 +26,8 @@ const Main = ({
   onArticleSave,
   onArticleDelete
 }) => {
-
+  const [toShow, setToShow] = React.useState(3);
+  const articlesToShow = articles.slice(0, toShow);
   return (
     <section className="main">
        <div className="main__overlay">
@@ -51,7 +53,11 @@ const Main = ({
           loggedIn={loggedIn}
           onArticleSave={onArticleSave}
           onArticleDelete={onArticleDelete}
-        />
+          articlesToShow={articlesToShow}
+          onLoginClick={onLoginClick}
+        >
+          {articles.length > 3 && <Button onClick={_ => setToShow(toShow + 3)} name="Показать еще" modifier="cards-list"/>}
+        </NewsCardList>
       }
       <About />
     </section>

@@ -22,10 +22,11 @@ const SearchForm = ({ onSearchNews, keyword, setKeyword }) => {
           className="search__input"
           type="text"
           placeholder="Введите тему новости"
-          value={keyword}
+          value={keyword || ''}
           onChange={handleKeywordChange}
           required
         />
+        <span className="search__error"></span>
         <Button name="Искать" modifier="search"/>
       </form>
     </section>
