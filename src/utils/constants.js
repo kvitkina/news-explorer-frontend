@@ -21,8 +21,8 @@ export const socialIcons = [
   },
 ];
 
-export const baseUrl = 'http://nomoreparties.co/news/v2/everything';
-export const apiKey = '28216fbc7eec47978577642245381406';
+export const BASE_URL = 'http://nomoreparties.co/news/v2/everything';
+export const API_KEY = '28216fbc7eec47978577642245381406';
 
 export const articles = [
   {

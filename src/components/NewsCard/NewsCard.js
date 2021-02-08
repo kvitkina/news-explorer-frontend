@@ -10,6 +10,8 @@ import BookmarkIconActive from '../icons/BookmarkIconActive';
 const NewsCard = ({ _id, title, text, date, source, link, image, owner, loggedIn, keyword, onArticleSave, onArticleDelete, onLoginClick }) => {
   const [ isHovered, setIsHovered ] = React.useState(false);
   const [ isSaved, setIsSaved] = React.useState(false);
+  const newsDate = new Date(date);
+  const options = { day: "numeric", month: "long", year: "numeric" };
 
   const handleMouseEnter = () => {
     setIsHovered(true)
@@ -19,7 +21,7 @@ const NewsCard = ({ _id, title, text, date, source, link, image, owner, loggedIn
   }
 
   const handleBookmarkIconClick = () => {
-    onArticleSave({ keyword, title, text, date, source, link, image, owner })
+    onArticleSave({ keyword, title, text, date: newsDate, source, link, image, owner })
     setIsSaved(true)
   }
   const handleTrashIconClick = () => {
@@ -57,7 +59,7 @@ const NewsCard = ({ _id, title, text, date, source, link, image, owner, loggedIn
         />}
       <img src={image} className="card__image" alt={title}/>
       <div className="card__description">
-        <p className="card__date">{date}</p>
+        <p className="card__date">{newsDate.toLocaleDateString('ru', options)}</p>
         <div className="card__text-container">
           <h3 className="card__title">{title}</h3>
           <p className="card__subtitle">{text}</p>

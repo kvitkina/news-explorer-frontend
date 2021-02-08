@@ -2,16 +2,11 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import '../NewsCardList/NewsCardList.css';
 import '../App/App';
-import Button from '../Button/Button';
 import NewsCard from '../NewsCard/NewsCard';
 
-
-const NewsCardList = ({ children, articlesToShow, onLoginClick, savedArticles, loggedIn, keyword, onArticleSave, onArticleDelete }) => {
+const NewsCardList = ({ children, articles, onLoginClick, savedArticles, loggedIn, keyword, onArticleSave, onArticleDelete }) => {
   const location = useLocation();
   const path = location.pathname;
-
-  // const [toShow, setToShow] = React.useState(3);
-  // const articlesToShow = articles.slice(0, toShow);
 
   return (
     <>
@@ -19,9 +14,10 @@ const NewsCardList = ({ children, articlesToShow, onLoginClick, savedArticles, l
     <section className="cards page__section">
        <h2 className="cards__title">Результаты поиска</h2>
       <ul className="cards__list">
-       {articlesToShow.map((article, i) => {
+       {articles.map((article, i) => {
          return <NewsCard
            key={i}
+           owner={article.owner}
            _id={article._id}
            link={article.url}
            image={article.urlToImage}
@@ -34,17 +30,18 @@ const NewsCardList = ({ children, articlesToShow, onLoginClick, savedArticles, l
            onArticleSave={onArticleSave}
            onArticleDelete={onArticleDelete}
            onLoginClick={onLoginClick}
+           savedArticles={savedArticles}
          />
        })}
       </ul>
       {children}
-      {/* {articles.length > 3 && <Button onClick={_ => setToShow(toShow + 3)} name="Показать еще" modifier="cards-list"/>} */}
       </section>}
 
       {path === "/saved-news" &&
       <section className="cards page__section">
       <ul className="cards__list">
        {savedArticles.map((savedArticle, i) => {
+         console.log(savedArticle)
          return <NewsCard
            key={i}
            _id={savedArticle._id}

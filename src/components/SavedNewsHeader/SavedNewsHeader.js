@@ -12,12 +12,10 @@ const SavedNewsHeader = ({ savedArticles }) => {
     sum[item.keyword] = (sum[item.keyword] || 0) + 1;
     return sum;
   }, {});
-  console.log(keywordsArray)
 
   const keysOnly = Object.keys(keywordsArray).sort(function (a, b) {
     return keywordsArray[a] > keywordsArray[b] ? -1 : 1;
   });
-  console.log(keysOnly)
 
   const keywordsRender = (arr) => {
     if(arr.length > 3) {

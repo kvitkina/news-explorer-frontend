@@ -32,14 +32,17 @@ const App = () => {
 
   React.useEffect(() => {
     if (loggedIn) {
-      mainApi.getSavedArticles()
-        .then((res) => { setSavedArticles(res); })
-        .catch((err) => console.log(err));
       mainApi.getUserInfo()
         .then((res) => { setCurrentUser(res); })
         .catch((err) => console.log(err));
+      mainApi.getSavedArticles()
+        .then((res) => {
+          console.log(res)
+          const userArticles = res.filter((item) => item.owner === currentUser._id)
+          setSavedArticles(userArticles); })
+        .catch((err) => console.log(err));
     }
-  }, [loggedIn]);
+  }, [loggedIn, currentUser._id]);
 
 // поиск новостей по ключевому слову
   const onSearchNews = (keyword) => {
@@ -85,6 +88,7 @@ const App = () => {
     if(loggedIn) {
       mainApi.addArticle({...newArticle, keyword})
       .then((res) => {
+        console.log(res)
         const newArticles = articles.map((article) => {
           if(article.url === res.link) {
             return {...article, _id: res._id}
