@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import CloseIcon from '../icons/CloseIcon';
 
 const PopupWithForm = ({
-  title, children, name, onSubmit, submitError, onClose, linkName, buttonName, isOpen, onOverlayClose, onCurrentPopupOpen
+  title, children, name, onSubmit, submitError, onClose, isDisabled, linkName, buttonName, isOpen, onOverlayClose, onCurrentPopupOpen
 }) => {
   return (
     <section className={`popup ${isOpen && 'popup_opened'}`} onClick={onOverlayClose}>
@@ -16,7 +16,12 @@ const PopupWithForm = ({
             {children}
             <div className="popup__input-container">
               <span className="popup__input-error popup__input-error_type_submit" id="submit-error">{submitError}</span>
-              <Button name={buttonName} modifier="popup" type="submit"/>
+              <Button
+                name={buttonName}
+                type="submit"
+                isDisabled={isDisabled}
+                modifier={!isDisabled ? "popup" : "popup-disabled"}
+              />
             </div>
           </fieldset>
         </form>

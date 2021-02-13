@@ -37,9 +37,7 @@ const App = () => {
         .catch((err) => console.log(err));
       mainApi.getSavedArticles()
         .then((res) => {
-          console.log(res)
-          const userArticles = res.filter((item) => item.owner === currentUser._id)
-          setSavedArticles(userArticles); })
+          setSavedArticles(res); })
         .catch((err) => console.log(err));
     }
   }, [loggedIn, currentUser._id]);
@@ -56,7 +54,7 @@ const App = () => {
       localStorage.setItem('articles', JSON.stringify(res.articles));
       localStorage.setItem('keyword', keyword);
       setArticles(res.articles)
-      setKeyword(keyword)
+      setKeyword('')
       setHaveNews(true)
       if(res.articles.length === 0) {
         setNotFound(true)

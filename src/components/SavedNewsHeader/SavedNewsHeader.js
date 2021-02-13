@@ -25,18 +25,25 @@ const SavedNewsHeader = ({ savedArticles }) => {
     }
   }
 
+  const savedArticlesText = (length) => {
+    if(length >= 5 || length === 0){
+      return "сохраненных статей"
+    } else if (length < 5 && length > 1){
+      return "сохраненные статьи"
+    } else if(length === 1) {
+      return "сохраненная статья"
+    }
+  }
   return (
     <section className="saved-news-header page__section">
       <p className="saved-news-header__page-name">Сохраненные статьи</p>
       <h2 className="saved-news-header__title">
         {currentUser.name}, у вас {savedArticles.length} {' '}
-        {savedArticles.length >= 5 || savedArticles.length === 0
-          ? "сохраненных статей"
-          : "сохраненные статьи"}
+        {savedArticlesText(savedArticles.length)}
       </h2>
       <p className="saved-news-header__words"> {keysOnly.length === 1
         ? "По rлючевому слову: "
-        : "По ключевым словам: "  }
+        : "По ключевым словам: " }
         <span className="saved-news-header__words saved-news-header__words_span">
          {keywordsRender(keysOnly)}
         </span>

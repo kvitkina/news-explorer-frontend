@@ -3,61 +3,74 @@ import '../PopupWithForm/PopupWithForm.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 const LoginPopup = ({ onClose, isOpen, onOverlayClose, onRegisterPopupOpen, onLogin }) => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [ formData, setFormData ] = React.useState({});
+  const [ formErrors, setFormErrors] = React.useState({});
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  const handleInputChange = (e) => {
+    const { name } = e.target;
+    setFormData ({...formData, [name]: e.target.value})
+    setFormErrors ({...formErrors, [name]: e.target.validationMessage || ''})
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    const { email,password } = formData
     onLogin(email,password)
+    setFormData({
+      email: '',
+      password: ''
+    })
+  }
+
+  const isDisabled = () => {
+    if (
+      Object.keys(formData).length === 0 ||
+      Object.keys(formData).some(item => !formData[item]) ||
+      Object.keys(formErrors).some(item => formErrors[item])
+    )
+    { return true }
   }
 
   return (
     <PopupWithForm
       title="Вход"
       name="login"
-      buttonName="Войти"
       linkName="Зарегистрироваться"
+      buttonName="Войти"
       onClose={onClose}
       isOpen={isOpen}
       onOverlayClose={onOverlayClose}
       onCurrentPopupOpen={onRegisterPopupOpen}
       onSubmit={handleSubmit}
+      isDisabled={isDisabled()}
     >
-      <h4 className="popup__input-name">Email</h4>
+      <label className="popup__input-name">Email</label>
       <div className="popup__input-container">
         <input
           type="email"
-          id="email"
           name="email"
-          value={email || ''}
-          onChange={handleEmailChange}
+          value={formData.email || ''}
+          onChange={handleInputChange}
           className="popup__input"
           placeholder="Введите почту"
           required
         />
-        <span className="popup__input-error" id="email-error"></span>
+        <span className="popup__input-error">{formErrors.email}</span>
       </div>
-      <h4 className="popup__input-name">Пароль</h4>
+      <label className="popup__input-name">Пароль</label>
       <div className="popup__input-container">
         <input
           type="password"
-          id="password"
           name="password"
-          value={password || ''}
-          onChange={handlePasswordChange}
+          value={formData.password || ''}
+          onChange={handleInputChange}
           className="popup__input"
           placeholder="Введите пароль"
           minLength="4"
           maxLength="12"
           required
         />
-        <span className="popup__input-error" id="password-error"></span>
+        <span className="popup__input-error">{formErrors.password}</span>
       </div>
     </PopupWithForm>
   )

@@ -72,6 +72,17 @@
   position: relative;
 }
 
+.button_popup-disabled {
+  width: 360px;
+  height: 64px;
+  background-color: #E6E8EB;
+  color: #B6BCBF;
+  border: none;
+  margin-bottom: 16px;
+  align-self: center;
+  position: relative;
+}
+
 .button_popup:hover {
   background-color: #347EFF;
 }
