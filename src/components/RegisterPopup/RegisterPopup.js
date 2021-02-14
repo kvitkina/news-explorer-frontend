@@ -3,7 +3,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import '../PopupWithForm/PopupWithForm.css';
 
 const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen, onRegister }) => {
-  const [ formData, setFormData ] = React.useState({});
+  const [ formData, setFormData ] = React.useState({ email: '', password: '', name: '' });
   const [ formErrors, setFormErrors] = React.useState({});
 
   const handleInputChange = (e) => {
