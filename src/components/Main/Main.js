@@ -29,6 +29,7 @@ const Main = ({
 }) => {
   const [toShow, setToShow] = React.useState(3);
   const articlesToShow = articles.slice(0, toShow);
+
   return (
     <section className="main">
        <div className="main__overlay">
@@ -50,7 +51,7 @@ const Main = ({
       {notFound && <NotFound />}
       {haveNews &&
         <NewsCardList
-          articles={articles}
+          articles={articlesToShow}
           loggedIn={loggedIn}
           onArticleSave={onArticleSave}
           onArticleDelete={onArticleDelete}
@@ -58,7 +59,9 @@ const Main = ({
           onLoginClick={onLoginClick}
           savedArticles={savedArticles}
         >
-          {articles.length > 3 && <Button onClick={_ => setToShow(toShow + 3)} name="Показать еще" modifier="cards-list"/>}
+          <div>
+           {articles.length > 3 && <Button onClick={_ => setToShow(toShow + 3)} name="Показать еще" modifier="cards-list"/>}
+          </div>
         </NewsCardList>
       }
       <About />
