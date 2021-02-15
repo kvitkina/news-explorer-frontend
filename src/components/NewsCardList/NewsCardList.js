@@ -41,7 +41,6 @@ const NewsCardList = ({ children, articles, onLoginClick, savedArticles, loggedI
       <section className="cards page__section">
       <ul className="cards__list">
        {savedArticles.map((savedArticle, i) => {
-         console.log(savedArticle)
          return <NewsCard
            key={i}
            _id={savedArticle._id}
