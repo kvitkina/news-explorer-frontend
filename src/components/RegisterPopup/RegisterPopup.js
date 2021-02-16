@@ -2,7 +2,7 @@ import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import '../PopupWithForm/PopupWithForm.css';
 
-const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen, onRegister, submitError }) => {
+const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen, onRegister }) => {
   const [ formData, setFormData ] = React.useState({ email: '', password: '', name: '' });
   const [ formErrors, setFormErrors] = React.useState({});
 
@@ -43,7 +43,6 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen, onRe
       onCurrentPopupOpen={onLoginPopupOpen}
       onSubmit={handleSubmit}
       isDisabled={isDisabled()}
-      submitError={submitError}
     >
       <label className="popup__input-name">Email</label>
       <div className="popup__input-container">

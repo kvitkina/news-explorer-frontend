@@ -123,11 +123,11 @@ const App = () => {
     })
     .catch((err) => {
       if (err.status === 400) {
-        return setSubmitError('Пороль должен быть без пробелов');
+        setSubmitError('Пороль должен быть без пробелов');
       } else if (err.status === 409) {
-        return setSubmitError('Такой пользователь уже есть');
+        setSubmitError('Такой пользователь уже есть');
       } else {
-        return setSubmitError('Что-то пошло не так!');
+        setSubmitError('Что-то пошло не так!');
       }
     })
   }
@@ -144,11 +144,11 @@ const App = () => {
     })
     .catch((err) => {
       if (err.status === 400) {
-        return setSubmitError('Не передано одно из полей');
+        return console.log('Не передано одно из полей');
       } if (err.status === 401) {
-        return setSubmitError('Пользователь с email не найден');
+        return console.log('Пользователь с email не найден');
       }
-      return setSubmitError('Что-то пошло не так!');
+      return console.log('Error 500');
     });
   }
 
@@ -195,13 +195,11 @@ const App = () => {
     setIsRegisterPopupOpen(false)
     setIsInfoTooltipOpen(false)
     setIsLoginPopupOpen(true)
-    setSubmitError('')
   };
 
   const handleRegisterClick = () => {
     setIsLoginPopupOpen(false)
     setIsRegisterPopupOpen(true)
-    setSubmitError('')
   };
 
   const handleTooltip = () => {
@@ -290,7 +288,6 @@ const App = () => {
           onOverlayClose={handleOverlayClose}
           onRegisterPopupOpen={handleRegisterClick}
           onLogin={onLogin}
-          submitError={submitError}
         />
         <InfoTooltip
           onClose={closeAllPopups}
