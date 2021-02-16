@@ -19,9 +19,16 @@ const SavedNewsHeader = ({ savedArticles }) => {
 
   const keywordsRender = (arr) => {
     if(arr.length > 3) {
-      return arr.slice(0, 2).join(", ") + " и другим"
+      return arr.slice(0, 2).join(", ") + " и "
     } else if(arr.length <=3) {
       return arr.join(", ")
+    }
+  }
+  const othersKeywords = (arr) => {
+    if((arr.length - 2) >=2 || (arr.length - 2) <=4) {
+      return arr.length - 2 + "-м другим"
+    } else if((arr.length - 2) >=5) {
+      return arr.length - 2 + "-и другим"
     }
   }
 
@@ -45,7 +52,7 @@ const SavedNewsHeader = ({ savedArticles }) => {
         ? "По rлючевому слову: "
         : "По ключевым словам: " }
         <span className="saved-news-header__words saved-news-header__words_span">
-         {keywordsRender(keysOnly)}
+         {keywordsRender(keysOnly)} {othersKeywords(keysOnly)}
         </span>
       </p>
     </section>
