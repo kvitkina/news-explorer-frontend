@@ -52,7 +52,7 @@ const SavedNewsHeader = ({ savedArticles }) => {
         ? "По rлючевому слову: "
         : "По ключевым словам: " }
         <span className="saved-news-header__words saved-news-header__words_span">
-         {keywordsRender(keysOnly)} {othersKeywords(keysOnly)}
+         {keywordsRender(keysOnly)} {keysOnly.length > 3 && othersKeywords(keysOnly)}
         </span>
       </p>
     </section>
