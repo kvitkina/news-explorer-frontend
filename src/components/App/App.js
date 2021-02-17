@@ -54,7 +54,7 @@ const App = () => {
       localStorage.setItem('articles', JSON.stringify(res.articles));
       localStorage.setItem('keyword', keyword);
       setArticles(res.articles)
-      setKeyword('')
+      setKeyword(keyword)
       setHaveNews(true)
       if(res.articles.length === 0) {
         setNotFound(true)
@@ -87,7 +87,6 @@ const App = () => {
     if(loggedIn) {
       mainApi.addArticle({...newArticle, keyword})
       .then((res) => {
-        console.log(res)
         const newArticles = articles.map((article) => {
           if(article.url === res.link) {
             return {...article, _id: res._id}

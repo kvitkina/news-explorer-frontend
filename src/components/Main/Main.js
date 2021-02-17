@@ -24,8 +24,7 @@ const Main = ({
   setKeyword,
   haveNews,
   onArticleSave,
-  onArticleDelete,
-  savedArticles
+  onArticleDelete
 }) => {
   const [toShow, setToShow] = React.useState(3);
   const articlesToShow = articles.slice(0, toShow);
@@ -55,9 +54,7 @@ const Main = ({
           loggedIn={loggedIn}
           onArticleSave={onArticleSave}
           onArticleDelete={onArticleDelete}
-          articlesToShow={articlesToShow}
           onLoginClick={onLoginClick}
-          savedArticles={savedArticles}
         >
           <div>
            {articles.length > 3 && <Button onClick={_ => setToShow(toShow + 3)} name="Показать еще" modifier="cards-list"/>}

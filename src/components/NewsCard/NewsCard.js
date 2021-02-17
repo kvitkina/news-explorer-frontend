@@ -7,7 +7,7 @@ import TrashIcon from '../icons/TrashIcon';
 import BookmarkIconActive from '../icons/BookmarkIconActive';
 
 
-const NewsCard = ({ _id, title, text, date, source, link, image, owner, loggedIn, keyword, onArticleSave, onArticleDelete, onLoginClick }) => {
+const NewsCard = ({ _id, title, text, date, source, link, image, owner, loggedIn, keyword, onArticleSave, onArticleDelete, onLoginClick, savedArticles }) => {
   const [ isHovered, setIsHovered ] = React.useState(false);
   const [ isSaved, setIsSaved] = React.useState(false);
   const newsDate = new Date(date);

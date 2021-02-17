@@ -25,7 +25,7 @@ const SavedNewsHeader = ({ savedArticles }) => {
     }
   }
   const othersKeywords = (arr) => {
-    if((arr.length - 2) >=2 || (arr.length - 2) <=4) {
+    if((arr.length - 2) >=2 && (arr.length - 2) <=4) {
       return arr.length - 2 + "-м другим"
     } else if((arr.length - 2) >=5) {
       return arr.length - 2 + "-и другим"

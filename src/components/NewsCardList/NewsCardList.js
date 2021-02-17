@@ -4,7 +4,7 @@ import '../NewsCardList/NewsCardList.css';
 import '../App/App';
 import NewsCard from '../NewsCard/NewsCard';
 
-const NewsCardList = ({ children, articles, onLoginClick, savedArticles, loggedIn, keyword, onArticleSave, onArticleDelete }) => {
+const NewsCardList = ({ children, articles, setArticles, onLoginClick, savedArticles, loggedIn, keyword, onArticleSave, onArticleDelete }) => {
   const location = useLocation();
   const path = location.pathname;
 
@@ -31,6 +31,7 @@ const NewsCardList = ({ children, articles, onLoginClick, savedArticles, loggedI
            onArticleDelete={onArticleDelete}
            onLoginClick={onLoginClick}
            savedArticles={savedArticles}
+           setArticles={setArticles}
          />
        })}
       </ul>

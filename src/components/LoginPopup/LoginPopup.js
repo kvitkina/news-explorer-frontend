@@ -16,11 +16,11 @@ const LoginPopup = ({ onClose, isOpen, onOverlayClose, onRegisterPopupOpen, onLo
     e.preventDefault()
     const { email,password } = formData
     onLogin(email,password)
-    setFormData({
-      email: '',
-      password: ''
-    })
   }
+
+  React.useEffect(() => {
+    setFormData({ email: '', password: '' })
+  }, [isOpen])
 
   const isDisabled = () => {
     if (
@@ -67,7 +67,7 @@ const LoginPopup = ({ onClose, isOpen, onOverlayClose, onRegisterPopupOpen, onLo
           onChange={handleInputChange}
           className="popup__input"
           placeholder="Введите пароль"
-          minLength="4"
+          minLength="8"
           maxLength="12"
           required
         />

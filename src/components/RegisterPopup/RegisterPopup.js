@@ -16,12 +16,12 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen, onRe
     e.preventDefault()
     const { email, password, name } = formData;
     onRegister(email, password, name)
-    setFormData({
-      email: '',
-      password: '',
-      name: ''
-    })
   }
+
+  React.useEffect(() => {
+    setFormData({ email: '', password: '', name: '' })
+  }, [isOpen])
+
   const isDisabled = () => {
     if (
       Object.keys(formData).length === 0 ||
@@ -69,7 +69,7 @@ const RegisterPopup = ({ onClose, isOpen, onOverlayClose, onLoginPopupOpen, onRe
           onChange={handleInputChange}
           className="popup__input"
           placeholder="Введите пароль"
-          minLength="4"
+          minLength="8"
           maxLength="12"
           required
         />
