@@ -15,7 +15,7 @@ const PopupWithForm = ({
           <fieldset className="popup__form">
             {children}
             <div className="popup__input-container">
-              <span className="popup__input-error popup__input-error_type_submit">{submitError}</span>
+              <span className="popup__input-error popup__input-error_type_submit">{!isDisabled && submitError}</span>
               <Button
                 name={buttonName}
                 type="submit"
