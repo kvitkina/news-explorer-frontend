@@ -37,7 +37,7 @@
 }
 
 .card__text-container {
-  height: 194px;
+  min-height: 194px;
   white-space: normal;
   margin: 0 0 10px 0;
   overflow: hidden;
@@ -50,7 +50,7 @@
   line-height: 30px;
   color: #1A1B22;
   margin: 0 0 16px 0;
-  max-height: 90px;
+  /* max-height: 90px; */
 }
 
 .card__subtitle {
@@ -62,7 +62,7 @@
   margin: 0;
   text-overflow: ellipsis;
   overflow: hidden;
-  max-height: 110px;
+  /* max-height: 110px; */
 }
 
 .card__link {
@@ -82,18 +82,18 @@
   .card__title {
     font-size: 22px;
     line-height: 24px;
-    max-height: 72px;
+    /* max-height: 72px; */
     margin-bottom: 10px;
   }
   .card__description {
     padding: 16px;
   }
   .card__text-container {
-    height: 170px;
+    min-height: 170px;
     margin-bottom: 12px;
   }
   .card__subtitle {
-    max-height: 88px;
+    /* max-height: 88px; */
   }
 }
 
@@ -108,7 +108,7 @@
   }
   .card__text-container {
     margin-bottom: 8px;
-    height: 150px;
+    min-height: 150px;
   }
   .card__date {
     margin-bottom: 10px;

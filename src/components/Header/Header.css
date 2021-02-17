@@ -45,6 +45,9 @@
   .header_black {
     background-color: #000;
   }
+  .header_white {
+    background-color: #FFF;
+  }
   .logo {
     font-size: 16px;
   }
@@ -60,6 +63,9 @@
     position: absolute;
     left: 0;
     top: 56px;
+  }
+  .header__container_white {
+    background-color: #fff;
   }
   .header__container_visible {
     display: flex;

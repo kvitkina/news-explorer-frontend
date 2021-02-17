@@ -49,6 +49,15 @@
   color: #1A1B22;
 }
 
+.search__error {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  color: #FF0000;
+  text-shadow: 1px 1px rgb(75, 61, 61);
+  position: absolute;
+  left: 25%;
+  bottom: -28px;
+}
+
 @media screen and (max-width: 890px) {
   .search {
     padding-top: 38px;

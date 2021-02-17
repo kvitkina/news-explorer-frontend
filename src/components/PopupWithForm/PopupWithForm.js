@@ -4,17 +4,25 @@ import Button from '../Button/Button';
 import CloseIcon from '../icons/CloseIcon';
 
 const PopupWithForm = ({
-  title, children, name, onClose, linkName, buttonName, isOpen, onOverlayClose, onCurrentPopupOpen
+  title, children, name, onSubmit, submitError, onClose, isDisabled, linkName, buttonName, isOpen, onOverlayClose, onCurrentPopupOpen
 }) => {
   return (
     <section className={`popup ${isOpen && 'popup_opened'}`} onClick={onOverlayClose}>
       <div className="popup__container">
         <CloseIcon onClick={onClose}/>
-        <form className="popup__form-container" name={name} noValidate>
+        <form className="popup__form-container" onSubmit={onSubmit} name={name} noValidate>
           <h2 className="popup__title">{title}</h2>
           <fieldset className="popup__form">
             {children}
-            <Button name={buttonName} modifier="popup"/>
+            <div className="popup__input-container">
+              <span className="popup__input-error popup__input-error_type_submit">{!isDisabled && submitError}</span>
+              <Button
+                name={buttonName}
+                type="submit"
+                isDisabled={isDisabled}
+                modifier={!isDisabled ? "popup" : "popup-disabled"}
+              />
+            </div>
           </fieldset>
         </form>
         <div className="popup__redirect">

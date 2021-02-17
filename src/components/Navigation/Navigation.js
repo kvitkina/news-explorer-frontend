@@ -2,7 +2,7 @@ import React from 'react';
 import '../Navigation/Navigation.css';
 import { NavLink } from 'react-router-dom';
 
-const Navigation = () => {
+const Navigation = ({ loggedIn }) => {
   return (
     <nav className="navigation">
       <NavLink
@@ -12,13 +12,13 @@ const Navigation = () => {
       >
         Главная
       </NavLink>
-      <NavLink
+      {loggedIn && <NavLink
         exact to='/saved-news'
         className="navigation__item navigation__item-news"
         activeClassName="navigation__item-news_active"
       >
         Сохранённые статьи
-      </NavLink>
+      </NavLink>}
     </nav>
   )
 }

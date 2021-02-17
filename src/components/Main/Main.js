@@ -7,23 +7,60 @@ import SearchForm from '../SearchForm/SearchForm';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
+import Button from '../Button/Button';
 
+const Main = ({
+  onLoginClick,
+  onSignOut,
+  onMenuClick,
+  isMenuOpen,
+  onMenuClose,
+  articles,
+  preloader,
+  notFound,
+  loggedIn,
+  onSearchNews,
+  keyword,
+  setKeyword,
+  haveNews,
+  onArticleSave,
+  onArticleDelete
+}) => {
+  const [toShow, setToShow] = React.useState(3);
+  const articlesToShow = articles.slice(0, toShow);
 
-const Main = ({ onLogin, onMenuClick, isMenuOpen, onMenuClose }) => {
   return (
     <section className="main">
        <div className="main__overlay">
         <Header
-          onLogin={onLogin}
+          onLoginClick={onLoginClick}
           onMenuClick={onMenuClick}
           isMenuOpen={isMenuOpen}
           onMenuClose={onMenuClose}
+          loggedIn={loggedIn}
+          onSignOut={onSignOut}
         />
-        <SearchForm />
+        <SearchForm
+          keyword={keyword}
+          onSearchNews={onSearchNews}
+          setKeyword={setKeyword}
+        />
       </div>
-      <Preloader />
-      <NotFound />
-      <NewsCardList />
+      {preloader && <Preloader />}
+      {notFound && <NotFound />}
+      {haveNews &&
+        <NewsCardList
+          articles={articlesToShow}
+          loggedIn={loggedIn}
+          onArticleSave={onArticleSave}
+          onArticleDelete={onArticleDelete}
+          onLoginClick={onLoginClick}
+        >
+          <div>
+           {articles.length > 3 && <Button onClick={_ => setToShow(toShow + 3)} name="Показать еще" modifier="cards-list"/>}
+          </div>
+        </NewsCardList>
+      }
       <About />
     </section>
   )

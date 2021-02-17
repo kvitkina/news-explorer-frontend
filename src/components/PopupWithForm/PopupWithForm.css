@@ -74,11 +74,12 @@
   position: absolute;
   left: 0;
   top: 32px;
-  display: none;
+  display: inline;
 }
 
-.popup__input-error_active {
-  display: inline;
+.popup__input-error_type_submit {
+  left: 25%;
+  top: -22px;
 }
 
 .popup__form {

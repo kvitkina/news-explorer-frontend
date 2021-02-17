@@ -69,6 +69,18 @@
   border: none;
   margin-bottom: 16px;
   align-self: center;
+  position: relative;
+}
+
+.button_popup-disabled {
+  width: 360px;
+  height: 64px;
+  background-color: #E6E8EB;
+  color: #B6BCBF;
+  border: none;
+  margin-bottom: 16px;
+  align-self: center;
+  position: relative;
 }
 
 .button_popup:hover {
@@ -95,6 +107,10 @@
 
 @media screen and (max-width: 675px) {
   .button_header-auth {
+    align-self: center;
+    height: 56px;
+  }
+  .button_header-name {
     align-self: center;
     height: 56px;
   }
