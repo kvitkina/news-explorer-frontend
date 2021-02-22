@@ -144,7 +144,7 @@ const App = () => {
     .catch((err) => {
       if (err.status === 400) {
         return setSubmitError('Не передано одно из полей');
-      } if (err.status === 401) {
+      } else if (err.status === 401) {
         return setSubmitError('Пользователь с email не найден');
       }
       return setSubmitError('Что-то пошло не так!');
