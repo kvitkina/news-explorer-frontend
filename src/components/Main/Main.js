@@ -57,7 +57,12 @@ const Main = ({
           onLoginClick={onLoginClick}
         >
           <div>
-           {articles.length > 3 && <Button onClick={_ => setToShow(toShow + 3)} name="Показать еще" modifier="cards-list"/>}
+           {(articles.length > 3 && articles.length !== articlesToShow.length)
+           && <Button
+                onClick={_ => setToShow(toShow + 3)}
+                name="Показать еще"
+                modifier="cards-list"
+              />}
           </div>
         </NewsCardList>
       }
