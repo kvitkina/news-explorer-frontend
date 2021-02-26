@@ -23,7 +23,7 @@ const App = () => {
   const [articles, setArticles] = React.useState([]);
   const [keyword, setKeyword] = React.useState('');
   const [submitError, setSubmitError] = React.useState('');
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(null);
   const [preloader, setPreloader] = React.useState(false);
   const [notFound, setNotFound] = React.useState(false);
   const [haveNews, setHaveNews] = React.useState(false);
